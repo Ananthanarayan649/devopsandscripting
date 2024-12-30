@@ -1,0 +1,15 @@
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: nginxservice
+  labels:
+    name: nginxapp 
+spec: 
+  selector:
+    name: nginxapp
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 80
+      
+    

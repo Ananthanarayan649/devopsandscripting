@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.deployment.replicacount }}
+  selector:
+    matchLabels:
+      name: helm
+  template:
+    metadata:
+      name: httpdpod
+      labels:
+         name: helm
+    spec:
+      containers:
+        - name: httpcontainer
+          image: "{{ .Values.deployment.image.app }}:{{ .Values.deployment.image.version }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
+          

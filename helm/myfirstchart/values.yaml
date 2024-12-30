@@ -1,0 +1,22 @@
+# Default values for myfirstchart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+
+deployment:
+  name: helmdeployment
+  replicaCount: 3
+  image:
+    app: httpd
+    version: latest
+
+
+service:
+  name: helmservice
+  type: NodePort
+  port: 8080
+  targetPort: 80
+  nodePort: 31234
+
+  

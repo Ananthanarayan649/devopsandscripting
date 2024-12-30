@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: apachepod
+spec:
+  containers:
+    - name: apachecontainer
+      image: httpd:2.4
+      ports:
+        - containerPort: 80
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name: apachevolume 
+          mountPath: /tmp
+  volumes: 
+    - name: apachevolume
+      emptyDir: {}
+

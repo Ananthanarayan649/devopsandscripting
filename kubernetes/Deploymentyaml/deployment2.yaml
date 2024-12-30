@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apachedeployment
+spec:
+  replicas: 4
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      name: app
+  template:
+    metadata:
+      name: apachepod
+      labels: 
+        name: app 
+    spec:
+      containers:
+        - name: apachecontainer
+          image: httpd:2.4
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+

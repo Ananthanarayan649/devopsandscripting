@@ -1,0 +1,35 @@
+pipeline {
+    agent any 
+
+    stages {
+        stage(dockerinstall) {
+            steps {
+                sh '''
+                apt update
+                apt install docker.io
+                systemctl enable --now docker
+                '''
+            }
+        }
+        stage(dockeruserpermissionandrestart) {
+            steps {
+                sh '''
+                usermod -aG docker jenkins
+                systemctl restart jenkins                
+                '''
+            }
+        }
+        stage(dockerstatus) {
+            steps {
+                sh '''
+                systemctl status docker
+                systemctl start docker               
+                '''
+            }
+        }
+    }
+
+    
+}
+
+## this code is not working

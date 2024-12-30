@@ -1,0 +1,22 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: nginxpod 
+spec: 
+  containers:
+    - name: nginxcontainer
+      image: nginx:latest
+      ports: 
+        - containerPort: 80
+      resources:
+        limits:
+          memory: 128Mi
+          cpu: 500m
+      volumeMounts:
+        - name: volumefornginx
+          mountPath: /usr/share/nginx/html
+  volumes:
+    - name: volumefornginx
+      persistentVolumeClaim:
+        claimName: pvcnew
+      

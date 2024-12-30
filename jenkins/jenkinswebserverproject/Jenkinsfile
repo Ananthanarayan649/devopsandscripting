@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage(addingtwonumbers) {
+            steps {
+                sh '''
+                a=45
+                b=32
+                c=$((a+b))
+                echo "$c"
+                '''
+            }
+        }
+    }
+}
